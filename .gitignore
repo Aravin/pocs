@@ -1,0 +1,12 @@
+.DS_Store
+*.pem
+.env*
+!.env.example
+
+# dependencies and build output (nested POCs also have their own .gitignore)
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
