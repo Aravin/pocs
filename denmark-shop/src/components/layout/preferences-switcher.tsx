@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -58,23 +59,25 @@ export function CurrencySwitcher({
         <ChevronDown className="size-3 opacity-60" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-44">
-        <DropdownMenuLabel>{t("currency")}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {currencies.map((code) => (
-          <DropdownMenuItem
-            key={code}
-            onClick={() => handleChange(code)}
-            className="justify-between"
-          >
-            <span className="flex items-center gap-2">
-              <span className="w-8 font-semibold">{code}</span>
-              <span className="text-xs text-muted-foreground">
-                {currencyMeta[code].note[locale]}
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>{t("currency")}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {currencies.map((code) => (
+            <DropdownMenuItem
+              key={code}
+              onClick={() => handleChange(code)}
+              className="justify-between"
+            >
+              <span className="flex items-center gap-2">
+                <span className="w-8 font-semibold">{code}</span>
+                <span className="text-xs text-muted-foreground">
+                  {currencyMeta[code].note[locale]}
+                </span>
               </span>
-            </span>
-            {currency === code ? <Check className="size-3.5 text-gold-deep" /> : null}
-          </DropdownMenuItem>
-        ))}
+              {currency === code ? <Check className="size-3.5 text-gold-deep" /> : null}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -111,20 +114,22 @@ export function LanguageSwitcher({
         {locale}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-40">
-        <DropdownMenuLabel>{t("language")}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        {locales.map((code) => (
-          <DropdownMenuItem
-            key={code}
-            onClick={() =>
-              router.replace(`${pathname}${window.location.search}`, { locale: code })
-            }
-            className="justify-between"
-          >
-            {localeLabels[code]}
-            {locale === code ? <Check className="size-3.5 text-gold-deep" /> : null}
-          </DropdownMenuItem>
-        ))}
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>{t("language")}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {locales.map((code) => (
+            <DropdownMenuItem
+              key={code}
+              onClick={() =>
+                router.replace(`${pathname}${window.location.search}`, { locale: code })
+              }
+              className="justify-between"
+            >
+              {localeLabels[code]}
+              {locale === code ? <Check className="size-3.5 text-gold-deep" /> : null}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
